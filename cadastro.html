@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <meta charset="UTF-8">
+    <title>Conta Facil</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+    <body>
+        <h1>Cadastro de Contas</h1>
+        
+        <nav class="menu">
+            <a href="/index.html">Home</a>
+            <a href="/cadastro.html">Cadastro</a>
+            <a href="/relatorio.html">Relatórios</a>
+        </nav>
+        <br>
+        <div class="content">
+            <form name="formCadastro" class="form"> <div class="campo">
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id"  required>
+            </div>
+            <div class="campo">
+                <label for="nomeConta">Nome da Conta:</label>
+                <input type="text" id="nomeConta" name="nomeConta" autocomplete="off" required>
+            </div>
+            <div class="campo">
+                <label for="dataEmissao">Data de Emissão:</label>
+                <input type="date" id="dataEmissao" name="dataEmissao" required>
+            </div>
+            <div class="campo">
+                <label for="valor">Valor:</label>
+                <input type="number" id="valor" name="valor" autocomplete="off" required step="0.01">
+            </div>
+            <div class="campo">
+                <label for="vencimento">Vencimento:</label>
+                <input type="date" id="vencimento" name="vencimento" required>
+            </div>
+            <div class="campo">
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                <option value="pendente">Pendente</option>
+                <option value="paga">Paga</option>
+                <option value="cancelada">Cancelada</option>
+                </select>
+            </div>
+                <button class="bnt" type="button">Atualizar</button>
+                <button class="bnt" type="button">Deletar</button>
+                <button class="bnt" type="button">Novo</button>
+                <button class="bnt" type="button">&#10145;</button>
+                <button class="bnt" type="button">&#11013;</button>
+            </form>
+        </div>
+    </body>
+</html>
