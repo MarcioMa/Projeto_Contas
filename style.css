@@ -152,6 +152,31 @@ button {
   float: right;
 }
 
+.container{
+width: 400px;
+left: 10px;
+position: relative;
+justify-content: left;
+align-self: left;
+padding: 10px;
+padding-bottom: 40px;
+padding-right: 40px;
+margin-top: 0%;
+}
+
+/* Corrigir agenda */
+/* .events-container{
+width: 400px;
+left: 10px;
+position: relative;
+justify-content: left;
+align-self: left;
+padding: 10px;
+padding-bottom: 40px;
+padding-right: 40px;
+top: 0%;
+} */
+
 #events-list {
   list-style: none;
   padding: 0;
