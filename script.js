@@ -60,5 +60,5 @@ displayEvents();
 // Button Click Event Listener
 const saveButton = document.getElementById('save-button');
 saveButton.addEventListener('click', (event) => {
-  eventForm.dispatchEvent(new Event('submit')); // Simulate form submission
+  eventForm.dispatchEvent(new Event('submit'));
 });

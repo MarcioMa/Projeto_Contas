@@ -1,164 +1,163 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #ccc;
-  }
-  
-  h1 {
-    text-align: center;
-    margin: 1%;
-  }
-  
-  form{
-    margin: 20px;
-  }
-  .campo {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .content{
-    background-color: #FFF;
-    border: 5px groove #ccc;
-    width: 60%;
-    left: 250px;
-    position: relative;
-    justify-content: center;
-    align-self: center;
-    padding: 10px;
-    padding-bottom: 40px;
-    padding-right: 40px;
-    margin-top: 0%;
-  }
-  
-  input,
-  select {
-    width: 100%;
-    padding: 10px;
-    border: 2px groove #ccc;
-  }
+  font-family: Arial, sans-serif;
+  background-color: #ccc;
+}
 
-  select{
-    width: 103%;
-  }
+h1 {
+  text-align: center;
+  margin: 1%;
+}
 
-  .bnt {
-    background-color: #4CAF50;
-    color: white;
-    padding: 12px 25px;
-    margin: 5px;
-    border: none;
-    cursor: pointer;
-    position: relative;
-    float: right;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
+form{
+  margin: 20px;
+}
+.campo {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.content{
+  background-color: #FFF;
+  border: 5px groove #ccc;
+  width: 60%;
+  left: 250px;
+  position: relative;
+  justify-content: center;
+  align-self: center;
+  padding: 10px;
+  padding-bottom: 40px;
+  padding-right: 40px;
+  margin-top: 0%;
+}
+
+.bnt {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 25px;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  float: right;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 
 /* Basic Navigation Menu Styling */
 nav {
-    background-color: #333; 
-    color: #fff; 
-    padding: 10px 0;
-    margin-left: 20px;
-    margin-right: 20px; 
-  }
-  
+  background-color: #333; 
+  color: #fff; 
+  padding: 10px 0;
+  margin-left: 20px;
+  margin-right: 20px; 
+}
+
+nav ul {
+  list-style: none; 
+  margin: 0; 
+  padding: 0; 
+}
+
+nav li {
+  display: inline-block; 
+  margin-right: 20px; 
+}
+
+nav a {
+  text-decoration: none; 
+  color: #fff;
+  padding: 8px 15px; 
+}
+
+nav a:hover {
+  background-color: #555;
+}
+
+/* Responsive Menu (Optional) */
+@media (max-width: 768px) {
   nav ul {
-    list-style: none; 
-    margin: 0; 
-    padding: 0; 
+    text-align: center; 
   }
-  
+
   nav li {
-    display: inline-block; 
-    margin-right: 20px; 
+    display: block; 
+    margin-right: 0; 
+    margin-bottom: 10px; 
   }
-  
-  nav a {
-    text-decoration: none; 
-    color: #fff;
-    padding: 8px 15px; 
-  }
-  
-  nav a:hover {
-    background-color: #555;
-  }
-  
-  /* Responsive Menu (Optional) */
-  @media (max-width: 768px) {
-    nav ul {
-      text-align: center; 
-    }
-  
-    nav li {
-      display: block; 
-      margin-right: 0; 
-      margin-bottom: 10px; 
-    }
-  }
-  
+}
 
-  /* Basic styling for the agenda */
+
+/* Basic styling for the agenda */
 body {
-    font-family: sans-serif;
-  }
-  
-  .container {
-    width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    float: left;
-  }
-  
-  h1, h2 {
-    text-align: center;
-  }
-  
-  #form-container, #events-container {
-    padding: 5px;
-    padding-bottom: 25px;
-    margin-bottom: 10px;
-    border: 5px groove #ccc;
-  }
-  
-  label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  input[type="text"], input[type="date"], input[type="time"], textarea {
-    width: 100%;
-    padding: 8px;
-    border: 2px groove #333;
-    box-sizing: border-box;
-  }
+  font-family: sans-serif;
+}
 
-  textarea{
-    resize: none;
-  }
-  
-  button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    float: right;
-  }
-  
-  #events-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  #events-list li {
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
-  }
-  
+.container {
+  width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  float: left;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+#form-container, #events-container {
+  padding: 5px;
+  padding-bottom: 25px;
+  margin-bottom: 10px;
+  border: 5px groove #ccc;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 2px groove #ccc;
+}
+
+select{
+  width: 100%;
+}
+
+input[type="text"], input[type="date"], input[type="time"], input[type="number"], textarea {
+  width: 100%;
+  padding: 8px;
+  border: 2px groove #333;
+  box-sizing: border-box;
+}
+
+textarea{
+  resize: none;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  float: right;
+}
+
+#events-list {
+  list-style: none;
+  padding: 0;
+}
+
+#events-list li {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
