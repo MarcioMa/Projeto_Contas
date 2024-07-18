@@ -2,6 +2,17 @@ body {
     font-family: Arial, sans-serif;
     background-color: #ccc;
   }
+
+  .all{
+    margin: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center content */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
   
   h1 {
     text-align: center;
@@ -43,10 +54,6 @@ body {
     border: 2px groove #ccc;
   }
 
-  select{
-    width: 103%;
-  }
-
   .bnt {
     background-color: #4CAF50;
     color: white;
@@ -66,7 +73,8 @@ nav {
     color: #fff; 
     padding: 10px 0;
     margin-left: 20px;
-    margin-right: 20px; 
+    margin-right: 20px;
+    text-transform: uppercase; 
   }
   
   nav ul {
@@ -90,6 +98,10 @@ nav {
     background-color: #555;
   }
   
+  .active{
+    color: red;
+    font-weight: bold;
+  }
   /* Responsive Menu (Optional) */
   @media (max-width: 768px) {
     nav ul {
@@ -109,22 +121,35 @@ body {
     font-family: sans-serif;
   }
   
-  .container {
-    width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    float: left;
-  }
-  
   h1, h2 {
     text-align: center;
   }
   
   #form-container, #events-container {
+    background-color: #FFF;
     padding: 5px;
     padding-bottom: 25px;
     margin-bottom: 10px;
     border: 5px groove #ccc;
+  }
+
+  #form-container {
+    margin-top: 20px;
+    margin-left: 20px;
+    position: relative;
+    display: block;
+    float: left;
+    width: 400px;
+    max-width: 700px;
+    padding: 20px;
+  }
+
+  #events-container{
+    float: right;
+    width: 700px;
+    min-width: 700px;
+    margin: 20px;
+    padding-left: 40px;
   }
   
   label {
@@ -132,7 +157,7 @@ body {
     margin-bottom: 5px;
   }
   
-  input[type="text"], input[type="date"], input[type="time"], textarea {
+  input[type="text"], input[type="date"], input[type="time"], input[type="number"], textarea, select {
     width: 100%;
     padding: 8px;
     border: 2px groove #333;
@@ -147,11 +172,31 @@ body {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
+    margin-top: 10px;
     border: none;
     cursor: pointer;
     float: right;
   }
-  
+  button:hover{
+    color: red;
+    transition: 0.2s;
+  }
+
+  .delete-link{
+    background-color: #4CAF50;
+    color: white;
+    padding: 5px 10px;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .delete-link:hover {
+    color: red;
+    transition: 0.2s;
+  }
+
   #events-list {
     list-style: none;
     padding: 0;
@@ -160,5 +205,7 @@ body {
   #events-list li {
     border-bottom: 1px solid #ccc;
     padding: 10px;
+    text-align: center;
+    font-weight: bold;
   }
   

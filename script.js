@@ -4,22 +4,25 @@ let events = [];
 // Function to display events
 function displayEvents() {
   const eventsList = document.getElementById('events-list');
-  eventsList.innerHTML = ''; // Clear previous events
+  eventsList.innerHTML = ''; 
 
   events.forEach((event) => {
     const eventItem = document.createElement('li');
     eventItem.textContent = `${event.date} - ${event.time} ${event.name} - ${event.description}`;
+    
     // Create Delete Link
     const deleteLink = document.createElement('a');
     deleteLink.textContent = 'Excluir';
-    deleteLink.href = '#'; // Replace with actual delete URL if available
-    deleteLink.classList.add('delete-link'); // Add a class for styling
+    deleteLink.href = '#'; 
+    deleteLink.classList.add('delete-link'); 
 
     // Delete Link Click Event Listener
     deleteLink.addEventListener('click', (event) => {
-      event.preventDefault(); // Prevent default link behavior
-      events.splice(index, 1);
-      displayEvents();
+      if (confirm("Are you sure you want to delete this record?")) {
+        event.preventDefault();
+        events.splice(index, 1);
+        displayEvents();
+      }
     });
     eventItem.appendChild(deleteLink);
     eventsList.appendChild(eventItem);
@@ -29,16 +32,24 @@ function displayEvents() {
 // Event form submit handler
 const eventForm = document.getElementById('event-form');
 eventForm.addEventListener('submit', (event) => {
-  event.preventDefault(); // Prevent default form submission
+  event.preventDefault(); 
 
   const eventDate = document.getElementById('eventDate').value;
   const eventTime = document.getElementById('eventTime').value;
   const eventName = document.getElementById('eventName').value;
   const eventDescription = document.getElementById('eventDescription').value;
 
+  const dateObject = new Date(eventDate);
+
+  const formattedDate = dateObject.toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
+
   // Create a new event object
   const newEvent = {
-    date: eventDate,
+    date: formattedDate,
     time: eventTime,
     name: eventName,
     description: eventDescription
@@ -60,5 +71,5 @@ displayEvents();
 // Button Click Event Listener
 const saveButton = document.getElementById('save-button');
 saveButton.addEventListener('click', (event) => {
-  eventForm.dispatchEvent(new Event('submit')); // Simulate form submission
+  eventForm.dispatchEvent(new Event('submit'));
 });
