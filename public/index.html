@@ -16,7 +16,7 @@
   <div class="container">
     <div id="form-container">
       <h2>Agenda</h2>
-      <form id="event-form">
+      <form id="event-form" name="event-form">
         <label for="eventName">Nome do Evento:</label>
         <input type="text" id="eventName" name="eventName" required>
 
@@ -29,7 +29,7 @@
           <label for="eventDescription">Descrição:</label>
           <textarea id="eventDescription" name="eventDescription" rows="4" required></textarea>
 
-          <button type="button" id="save-button">Salvar</button>
+          <button type="submit" id="save-button">Salvar</button>
         </form>
       </div>
 
@@ -38,6 +38,6 @@
       <ul id="events-list"></ul>
     </div>
   </div>
-    <script src="/script.js"></script>
+      <script src="script.js"></script>
   </body>
 </html>
