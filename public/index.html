@@ -2,8 +2,9 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Conta Facil</title>
-  <link rel="stylesheet" href="style.css"> 
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Conta Facil 2024</h1>
@@ -32,12 +33,61 @@
           <button type="submit" id="save-button">Salvar</button>
         </form>
       </div>
+      
+      <div class="container-icones">
+        <a href="https://www.equatorialenergia.com.br/" target="_blank">
+          <img src="./img/equatorial.png" alt="equatorial" class="icones" id="equatorial"><br>
+          <label for="equatorial">Equatorial</label>
+        </a>
 
-    <div id="events-container">
-      <h2>Eventos Agendados</h2>
-      <ul id="events-list"></ul>
-    </div>
-  </div>
-      <script src="script.js"></script>
+        <a href="https://agencia-virtual.saneago.com.br/" target="_blank">
+          <img src="./img/Saneago.png" alt="saneago" class="icones" id="saneago"><br>
+          <label for="saneago">Saneago</label>
+        </a>
+
+        <a href="https://www8.receita.fazenda.gov.br/simplesnacional/" target="_blank">
+          <img src="./img/logo-simples-nacional.png" alt="simplesnacional" class="icones" id="simplesnacional"><br>
+          <label for="simplesnacional">PGMEI</label>
+        </a>
+
+        <a href="https://www.oi.com.br/minha-oi/segunda-via/" target="_blank">
+          <img src="./img/logo.jfif" alt="minha oi" class="icones" id="minha-oi"><br>
+          <label for="minha-oi">Oi Fibra</label>
+        </a>
+
+        <a href="https://www.itau.com.br/" target="_blank">
+          <img src="./img/Itau.jfif" alt="itaubank" class="icones" id="itaubank"><br>
+          <label for="itaubank">Banco</label>
+        </a>
+
+        <a href="https://mail.google.com/mail/u/0/?hl=pt-BR" target="_blank">
+          <img src="./img/gmail.png" alt="gmail" class="icones" id="gmail"><br>
+          <label for="gmail">E-mail</label>
+        </a>
+      </div>
+
+      <div id="events-container">
+        <h2>Eventos Agendados</h2>
+        <table id="events-table">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Hora</th>
+              <th>Nome do Evento</th>
+              <th>Descrição</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="events-table-body">
+            <!-- Os dados serão inseridos aqui dinamicamente -->
+          </tbody>
+        </table>
+      </div>
+  </div>      
+  <script src="script.js"></script>
+
   </body>
+  <footer>
+        <p>&copy; 2024 MMA SOFTWARES. Todos os direitos reservados.<br>Contatos +55(61) 9 8377-0283 | marmac1979@gmail.com</p>
+  </footer>
 </html>

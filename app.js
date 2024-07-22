@@ -52,6 +52,18 @@ app.post('/salvar_agenda', (req, res) => {
     });
 });
 
+// Aqui você deve buscar os dados da agenda no seu banco de dados (MySQL)
+app.get('/listar_agenda', (req, res) => {
+    connection.query('SELECT * FROM dbcf.events', (error, results, fields) => {
+      if (error) {
+        console.error('Erro ao buscar eventos:', error);
+        res.status(500).json({ error: 'Erro ao buscar eventos' });
+      } else {
+        res.json(results); // Retorna os eventos encontrados em formato JSON
+      }
+    });
+  });
+
 // Configuração para servir arquivos estáticos (CSS, JavaScript, etc.) do diretório 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -59,3 +71,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(port, () => {
     console.log(`Servidor está rodando em http://localhost:${port}`);
 });
+
+// Rota para executar Delete agenda
+app.delete(`/excluir_evento/:id`,(req, res) => {
+    const eventId = req.params.id;
+    const sql = 'DELETE FROM dbcf.events WHERE idEvents = ?';
+
+        connection.query(sql, [eventId], (error, results, fields) => {
+            if (error) {
+              console.error('Erro ao excluir evento:', error);
+              res.status(500).json({ error: 'Erro ao excluir evento' });
+            } else {
+              console.log(`Evento com ID ${eventId} excluído com sucesso`);
+              res.json({ message: `Evento com ID ${eventId} excluído com sucesso` });
+            }
+        });
+    });
