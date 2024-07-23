@@ -2,52 +2,58 @@
 <html lang="pt-br">
     <meta charset="UTF-8">
     <title>Conta Facil</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styleCadastro.css">
 </head>
     <body>
         <h1>Cadastro de Contas</h1>
         
         <nav class="menu">
-            <a href="index.html">Home</a>
+            <a href="index.html">Inicio</a>
             <a href="cadastro.html" class="active">Cadastro</a>
             <a href="relatorio.html">Relatórios</a>
         </nav>
         <br>
         <div class="content">
-            <form name="formCadastro" class="form"> <div class="campo">
-                <label for="id">ID:</label>
-                <input type="text" id="id" name="id"  required>
-            </div>
-            <div class="campo">
-                <label for="nomeConta">Nome da Conta:</label>
-                <input type="text" id="nomeConta" name="nomeConta" autocomplete="off" required>
-            </div>
-            <div class="campo">
-                <label for="dataEmissao">Data de Emissão:</label>
-                <input type="date" id="dataEmissao" name="dataEmissao" required>
-            </div>
-            <div class="campo">
-                <label for="valor">Valor:</label>
-                <input type="number" id="valor" name="valor" autocomplete="off" required step="0.01">
-            </div>
-            <div class="campo">
-                <label for="vencimento">Vencimento:</label>
-                <input type="date" id="vencimento" name="vencimento" required>
-            </div>
-            <div class="campo">
-                <label for="status">Status:</label>
-                <select id="status" name="status" required>
-                <option value="pendente">Pendente</option>
-                <option value="paga">Paga</option>
-                <option value="cancelada">Cancelada</option>
-                </select>
-            </div>
-                <button class="bnt" type="button">Atualizar</button>
-                <button class="bnt" type="button">Deletar</button>
-                <button class="bnt" type="button">Novo</button>
-                <button class="bnt" type="button">&#10145;</button>
-                <button class="bnt" type="button">&#11013;</button>
+            <form name="formCadastro" class="form"> 
+            <fieldset disabled="disabled">
+                <div class="campo" hidden>
+                    <label for="id">ID:</label>
+                    <input type="text" id="id" name="id"  required>
+                </div>
+                <div class="campo">
+                    <label for="nomeConta">Nome da Conta:</label>
+                    <input type="text" id="nomeConta" name="nomeConta" autocomplete="off" required>
+                </div>
+                <div class="campo">
+                    <label for="dataEmissao">Data de Emissão:</label>
+                    <input type="date" id="dataEmissao" name="dataEmissao" required>
+                </div>
+                <div class="campo">
+                    <label for="valor">Valor:</label>
+                    <input type="number" id="valor" name="valor" autocomplete="off" required step="0.01">
+                </div>
+                <div class="campo">
+                    <label for="vencimento">Vencimento:</label>
+                    <input type="date" id="vencimento" name="vencimento" required>
+                </div>
+                <div class="campo">
+                    <label for="status">Status:</label>
+                    <select id="status" name="status" required>
+                    <option value="pendente">Pendente</option>
+                    <option value="paga">Paga</option>
+                    <option value="cancelada">Cancelada</option>
+                    </select>
+                </div>
+            </fieldset>
+                <button class="bnt" name="bntNovo" type="button" onclick="novoRegistro()">Novo</button>
+                <button class="bnt" name="bntAtualiza" type="button">Atualizar</button>
+                <button class="bnt" name="bntDeleta" type="button">Deletar</button>
+                <button class="bnt" name="bntRight" type="button">&#10145;</button> <!-- botão direita -->
+                <button class="bnt" name="bntLeft" type="button">&#11013; </button> <!-- botão esquerda -->
             </form>
         </div>
     </body>
+    <footer>
+        <p>&copy; 2024 MMA SOFTWARES. Todos os direitos reservados.<br>Contatos +55(61) 9 8377-0283 | marmac1979@gmail.com</p>
+    </footer>
 </html>

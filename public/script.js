@@ -69,3 +69,12 @@ document.addEventListener('DOMContentLoaded', function() {
       });
   });
   
+  function novoRegistro(){
+    const bntNovo = getElementById('bntNovo').value('Salvar'); 
+    const bntAtualizar = getElementById('bntAtualiza').disabled;
+    const bntDeleta = getElementById('bntDeleta').disabled;
+    const bntRight = getElementById('bntRight').disabled;
+    const bntLeft = getElementById('bntLeft').disabled;
+ 
+    bntNovo.disabled = true
+  }

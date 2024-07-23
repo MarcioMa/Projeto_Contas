@@ -115,12 +115,7 @@ nav {
     }
   }
   
-
-/* Basic styling for the agenda */
-body {
-    font-family: sans-serif;
-  }
-  
+/* Basic styling for the agenda */  
   h1, h2 {
     text-align: center;
   }
@@ -247,6 +242,9 @@ body {
     width: 700px;
     padding-left: 45px;
   }
+  .container-icones img{
+
+  }
 
   .container-icones a, label{
     text-decoration: none;
@@ -262,8 +260,9 @@ body {
   }
 
   .icones{
+    padding-left: 5px;
+    margin-right: 12px;
     margin-top: 10px;
-    margin-right: 10px;
     width: 84px;
     height: 64px;
     border: 5px groove #ccc;
