@@ -60,8 +60,10 @@ body {
   input[type="button"] {
     background-color: #4CAF50;
     color: white;
-    padding: 12px 25px;
-    margin: 5px;
+    padding: auto;
+    width: 100px;
+    height: 40px;
+    margin: 3px;
     border: none;
     cursor: pointer;
     position: relative;
@@ -69,10 +71,12 @@ body {
     right: 10px;
     font-weight: bold;
     text-transform: uppercase;
+    text-align: center;
   }
 
   input[type="button"]:disabled {
     background-color: #ccc;
+    cursor: default;
   }
 /* Basic Navigation Menu Styling */
 nav {
