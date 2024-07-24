@@ -51,14 +51,13 @@ body {
     border:none;
   }
   
-  input,
-  select {
+  input[type="text"], input[type="date"], input[type="number"] {
     width: 100%;
     padding: 10px;
     border: 2px groove #ccc;
   }
 
-  .bnt {
+  input[type="button"] {
     background-color: #4CAF50;
     color: white;
     padding: 12px 25px;
@@ -67,10 +66,14 @@ body {
     cursor: pointer;
     position: relative;
     float: right;
+    right: 10px;
     font-weight: bold;
     text-transform: uppercase;
   }
 
+  input[type="button"]:disabled {
+    background-color: #ccc;
+  }
 /* Basic Navigation Menu Styling */
 nav {
     background-color: #333; 

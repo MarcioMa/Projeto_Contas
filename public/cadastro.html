@@ -15,7 +15,7 @@
         <br>
         <div class="content">
             <form name="formCadastro" class="form"> 
-            <fieldset disabled="disabled">
+            <fieldset disabled="disabled" id="fldSet">
                 <div class="campo" hidden>
                     <label for="id">ID:</label>
                     <input type="text" id="id" name="id"  required>
@@ -45,14 +45,16 @@
                     </select>
                 </div>
             </fieldset>
-                <button class="bnt" name="bntNovo" type="button" onclick="novoRegistro()">Novo</button>
-                <button class="bnt" name="bntAtualiza" type="button">Atualizar</button>
-                <button class="bnt" name="bntDeleta" type="button">Deletar</button>
-                <button class="bnt" name="bntRight" type="button">&#10145;</button> <!-- botão direita -->
-                <button class="bnt" name="bntLeft" type="button">&#11013; </button> <!-- botão esquerda -->
+                <input type="button" id="bntNovo" value="Novo" onclick="novoReg()">
+                <input type="button" id="bntSave" value="Salvar" onclick="saveReg()">
+                <input type="button" id="bntAtualiza" value="Atualizar" onclick="atualizarReg()">
+                <input type="button" id="bntExcluir" value="Excluir" onclick="excluirReg()">
+                <input type="button" id="bntRight" value="&#10145;" onclick="moveD()"> <!-- botão direita -->
+                <input type="button" id="bntLeft" value="&#11013;" onclick="moveE()"> <!-- botão esquerda -->
             </form>
         </div>
     </body>
+    <script src="scriptCadastro.js"></script>
     <footer>
         <p>&copy; 2024 MMA SOFTWARES. Todos os direitos reservados.<br>Contatos +55(61) 9 8377-0283 | marmac1979@gmail.com</p>
     </footer>

@@ -68,13 +68,3 @@ document.addEventListener('DOMContentLoaded', function() {
         alert('Erro ao carregar os eventos');
       });
   });
-  
-  function novoRegistro(){
-    const bntNovo = getElementById('bntNovo').value('Salvar'); 
-    const bntAtualizar = getElementById('bntAtualiza').disabled;
-    const bntDeleta = getElementById('bntDeleta').disabled;
-    const bntRight = getElementById('bntRight').disabled;
-    const bntLeft = getElementById('bntLeft').disabled;
- 
-    bntNovo.disabled = true
-  }
