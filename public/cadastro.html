@@ -14,7 +14,7 @@
         </nav>
         <br>
         <div class="content">
-            <form name="formCadastro" class="form"> 
+            <form name="formCadastro" id="formCadastro" class="form"> 
             <fieldset disabled="disabled" id="fldSet">
                 <div class="campo" hidden>
                     <label for="id">ID:</label>
@@ -45,12 +45,12 @@
                     </select>
                 </div>
             </fieldset>
-                <input type="button" id="bntNovo" value="Novo" onclick="novoReg()">
-                <input type="button" id="bntSave" value="Salvar" disabled onclick="saveReg()">
-                <input type="button" id="bntAtualiza" value="Atualizar" disabled  onclick="atualizarReg()">
-                <input type="button" id="bntExcluir" value="Excluir" disabled onclick="excluirReg()">
-                <input type="button" id="bntRight" value="&#10145;" onclick="moveD()"> <!-- botão direita -->
-                <input type="button" id="bntLeft" value="&#11013;" disabled onclick="moveE()"> <!-- botão esquerda -->
+                <input type="button" id="bntNovo" value="Novo" onclick="clickNovoReg()">
+                <input type="button" id="bntSave" value="Salvar" disabled onclick="clickSaveReg()">
+                <input type="button" id="bntAtualiza" value="Atualizar"  onclick="clickAtualizarReg()">
+                <input type="button" id="bntExcluir" value="Excluir" disabled onclick="clickExcluirReg()">
+                <input type="button" id="bntRight" value="&#10145;" onclick="clickMoveD()"> <!-- botão direita -->
+                <input type="button" id="bntLeft" value="&#11013;" disabled onclick="clickMoveE()"> <!-- botão esquerda -->
             </form>
         </div>
     </body>
