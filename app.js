@@ -123,6 +123,75 @@ app.delete('/excluir/:id', (req, res) => {
   });
 });
 
+// Rota para salvar o registro
+app.post('/salvar_registro', (req, res) => {
+  const { nomeConta, dataEmissao, valor, vencimento, status } = req.body;
+
+  // Validação simples dos dados recebidos
+  if (!nomeConta || !dataEmissao || !valor || !vencimento || !status) {
+    return res.status(400).json({ success: false, message: 'Todos os campos são obrigatórios.' });
+  }
+
+  // SQL para inserir o novo registro
+  const sql = 'INSERT INTO contas (nomeConta, dataEmissao, valor, vencimento, status) VALUES (?, ?, ?, ?, ?)';
+
+  // Obter uma conexão do pool
+  pool.getConnection((err, connection) => {
+    if (err) {
+      console.error('Erro ao obter conexão do pool:', err);
+      return res.status(500).json({ success: false, message: 'Erro ao salvar o registro.' });
+    }
+
+    // Executar a query
+    connection.query(sql, [nomeConta, dataEmissao, valor, vencimento, status], (error, results) => {
+      // Liberar a conexão de volta ao pool
+      connection.release();
+
+      if (error) {
+        console.error('Erro ao salvar o registro:', error);
+        return res.status(500).json({ success: false, message: 'Erro ao salvar o registro.' });
+      }
+
+      // Sucesso
+      res.json({ success: true, message: 'Registro salvo com sucesso!' });
+    });
+  });
+});
+
+//Lista de registro salvo
+app.get('/registro/:id', (req, res) => {
+  const id = req.params.id;
+  
+  // SQL para buscar o registro pelo ID
+  const sql = 'SELECT * FROM events WHERE idEvents = ?';
+  
+  // Obter uma conexão do pool
+  pool.getConnection((err, connection) => {
+    if (err) {
+      console.error('Erro ao obter conexão do pool:', err);
+      return res.status(500).json({ success: false, message: 'Erro ao buscar o registro.' });
+    }
+    
+    // Executar a query
+    connection.query(sql, [id], (error, results) => {
+      // Liberar a conexão de volta ao pool
+      connection.release();
+      
+      if (error) {
+        console.error('Erro ao buscar o registro:', error);
+        return res.status(500).json({ success: false, message: 'Erro ao buscar o registro.' });
+      }
+      
+      // Se o registro for encontrado, enviar a resposta
+      if (results.length > 0) {
+        res.json({ success: true, data: results[0] });
+      } else {
+        res.status(404).json({ success: false, message: 'Registro não encontrado.' });
+      }
+    });
+  });
+});
+
 // Configuração para servir arquivos estáticos (CSS, JavaScript, etc.) do diretório 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 
