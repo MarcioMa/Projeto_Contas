@@ -190,14 +190,33 @@ function carregarRegistros() {
         });
 }
 
+function formatarData(data) {
+    const partes = data.split('-'); // Divide a string da data em partes
+    if (partes.length === 3) {
+        // Se a string estiver no formato esperado 'yyyy-MM-dd'
+        const ano = partes[0];
+        const mes = partes[1];
+        const dia = partes[2];
+        return `${dia}-${mes}-${ano}`;
+    } else {
+        // Caso contrário, retorna a data original
+        return data;
+    }
+}
+
+function formatarValor(valor) {
+    const valorFormatado = Number(valor).toFixed(2); // Formata para duas casas decimais
+    return valorFormatado.toLocaleString('pt-BR'); // Adiciona separador de milhares para formato brasileiro
+}
+
 // Função para preencher o formulário com os dados do registro
 function preencherFormulario(registro) {
     document.getElementById('nomeConta').value = registro.nomeConta;
-    document.getElementById('dataEmissao').value = registro.dataEmissao;
-    document.getElementById('valor').value = registro.valor;
-    document.getElementById('vencimento').value = registro.vencimento;
+    document.getElementById('dataEmissao').value = formatarData(registro.dataEmissao);
+    document.getElementById('valor').value = formatarValor(registro.valor);
+    document.getElementById('vencimento').value = formatarData(registro.vencimento);
     document.getElementById('status').value = registro.status;
-    document.getElementById('id').value = registro.idEvents;
+    document.getElementById('id').value = registro.idConta;
 }
 
 // Função para avançar para o próximo registro

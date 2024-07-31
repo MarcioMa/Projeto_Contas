@@ -159,34 +159,32 @@ app.post('/salvar_registro', (req, res) => {
 });
 
 //Lista de registro salvo
-app.get('/registro/:id', (req, res) => {
-  const id = req.params.id;
-  
-  // SQL para buscar o registro pelo ID
-  const sql = 'SELECT * FROM events WHERE idEvents = ?';
+app.get('/registros', (req, res) => {
+  // SQL para buscar todos os registros da tabela contas
+  const sql = 'SELECT * FROM contas';
   
   // Obter uma conexão do pool
   pool.getConnection((err, connection) => {
     if (err) {
       console.error('Erro ao obter conexão do pool:', err);
-      return res.status(500).json({ success: false, message: 'Erro ao buscar o registro.' });
+      return res.status(500).json({ success: false, message: 'Erro ao obter conexão do pool.' });
     }
     
-    // Executar a query
-    connection.query(sql, [id], (error, results) => {
+    // Executar a query SQL
+    connection.query(sql, (error, results) => {
       // Liberar a conexão de volta ao pool
       connection.release();
       
       if (error) {
-        console.error('Erro ao buscar o registro:', error);
-        return res.status(500).json({ success: false, message: 'Erro ao buscar o registro.' });
+        console.error('Erro ao executar a query:', error);
+        return res.status(500).json({ success: false, message: 'Erro ao executar a query SQL.' });
       }
       
-      // Se o registro for encontrado, enviar a resposta
+      // Verificar se há resultados da consulta
       if (results.length > 0) {
-        res.json({ success: true, data: results[0] });
+        res.json({ success: true, data: results });
       } else {
-        res.status(404).json({ success: false, message: 'Registro não encontrado.' });
+        res.status(404).json({ success: false, message: 'Nenhum registro encontrado.' });
       }
     });
   });
