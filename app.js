@@ -190,6 +190,46 @@ app.get('/registros', (req, res) => {
   });
 });
 
+// Rota para executar Delete contas
+app.delete('/excluir_registro/:id', (req, res) => {
+  const idContas = req.params.id;
+
+  if (!idContas) {
+    return res.status(400).json({ error: 'ID do conta inválido' });
+  }
+
+  const sql = 'DELETE FROM contas WHERE idContas = ?';
+
+  // Pegar uma conexão do pool
+  pool.getConnection((err, connection) => {
+      if (err) {
+          console.error('Erro ao obter conexão do pool:', err);
+          res.status(500).json({ error: 'Erro ao excluir conta' });
+          return;
+      }
+
+      // Executar query
+      connection.query(sql, [idContas], (error, results, fields) => {
+          // Liberar a conexão de volta ao pool
+          connection.release();
+
+          if (error) {
+        console.error('Erro ao excluir evento:', error);
+        return res.status(500).json({ error: 'Erro ao excluir evento' });
+      }
+
+      // Verificar se o evento foi realmente excluído
+      if (results.affectedRows === 0) {
+        console.log(`Conta com ID ${idContas} não encontrado`);
+        return res.status(404).json({ error: `Conta com ID ${idContas} não encontrado` });
+      }
+
+      console.log(`Conta com ID ${idContas} excluído com sucesso`);
+      res.json({ message: `Conta com ID ${idContas} excluído com sucesso` });
+    });
+  });
+});
+
 // Configuração para servir arquivos estáticos (CSS, JavaScript, etc.) do diretório 'public'
 app.use(express.static(path.join(__dirname, 'public')));
 

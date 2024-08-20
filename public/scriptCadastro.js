@@ -25,6 +25,8 @@ function clickNovoReg(){
     bntExcluir.disabled = true;
     bntRight.disabled = true;
     bntLeft.disabled = true;
+    formCadastro.reset();
+    
   }else{
     bntNovo.value = 'Novo';
     bntSave.disabled = true;
@@ -73,7 +75,7 @@ function SaveReg() {
       status: document.getElementById('status').value
   };
 
-  fetch('/salvar_registro', { // Substitua pela sua URL real
+  fetch('/salvar_registro', { 
       method: 'POST',
       headers: {
           'Content-Type': 'application/json'
@@ -114,7 +116,7 @@ function AtualizarReg() {
       status: document.getElementById('status').value
   };
 
-  fetch('/atualizar_registro', { // Substitua pela sua URL real
+  fetch('/atualizar_registro', { 
       method: 'PUT',
       headers: {
           'Content-Type': 'application/json'
@@ -145,24 +147,29 @@ function AtualizarReg() {
 }
 
 function clickExcluirReg() {
-  const id = document.getElementById('id').value;
+  const id = document.getElementById('idConta').value;
 
-  fetch(`/excluir_registro/${id}`, { // Substitua pela sua URL real
-      method: 'DELETE'
-  })
-  .then(response => response.json())
-  .then(data => {
-      if (data.success) {
-          alert('Registro excluído com sucesso!');
-          window.location.href='./cadastro.html'
-      } else {
-          alert('Falha ao excluir o registro.');
-      }
-  })
-  .catch(error => {
-      console.error('Erro:', error);
-      alert('Erro ao excluir o registro.');
-  });
+  if (confirm(`Tem certeza que deseja excluir o registro com ID ${id}?`)) {
+        fetch(`/excluir_registro/${id}`, { 
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Registro excluído com sucesso!');
+                setTimeout(() => {
+                    carregarRegistros();
+                }, 1000);
+
+            } else {
+                alert('Falha ao excluir o registro.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro:', error);
+            alert('Erro ao excluir o registro.');
+        });
+    } 
 }
 
 let registros = [];
@@ -176,11 +183,13 @@ function carregarRegistros() {
             if (data.success) {
                 registros = data.data;
                 if (registros.length > 0) {
-                    indiceAtual = 0; // Começar com o primeiro registro
+                    indiceAtual = 0; 
                     preencherFormulario(registros[indiceAtual]);
                     atualizarEstadoBotoes();
+                    bntExcluir.disabled = false;
                 }
             } else {
+                bntExcluir.disabled = true;
                 alert('Nenhum registro encontrado.');
             }
         })
@@ -211,12 +220,12 @@ function formatarValor(valor) {
 
 // Função para preencher o formulário com os dados do registro
 function preencherFormulario(registro) {
+    document.getElementById('idConta').value = registro.idContas;
     document.getElementById('nomeConta').value = registro.nomeConta;
     document.getElementById('dataEmissao').value = formatarData(registro.dataEmissao);
     document.getElementById('valor').value = formatarValor(registro.valor);
     document.getElementById('vencimento').value = formatarData(registro.vencimento);
     document.getElementById('status').value = registro.status;
-    document.getElementById('id').value = registro.idConta;
 }
 
 // Função para avançar para o próximo registro

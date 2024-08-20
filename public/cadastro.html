@@ -16,9 +16,9 @@
         <div class="content">
             <form name="formCadastro" id="formCadastro" class="form"> 
             <fieldset disabled="disabled" id="fldSet">
-                <div class="campo" hidden>
+                <div class="campo">
                     <label for="id">ID:</label>
-                    <input type="text" id="id" name="id"  required>
+                    <input type="text" id="idConta" name="idConta" readonly>
                 </div>
                 <div class="campo">
                     <label for="nomeConta">Nome da Conta:</label>
@@ -48,9 +48,9 @@
                 <input type="button" id="bntNovo" value="Novo" onclick="clickNovoReg()">
                 <input type="button" id="bntSave" value="Salvar" disabled onclick="clickSaveReg()">
                 <input type="button" id="bntAtualiza" value="Atualizar"  onclick="clickAtualizarReg()">
-                <input type="button" id="bntExcluir" value="Excluir" disabled onclick="clickExcluirReg()">
+                <input type="button" id="bntExcluir" value="Excluir" onclick="clickExcluirReg()">
                 <input type="button" id="bntRight" value="&#10145;" onclick="clickMoveD()"> <!-- botão direita -->
-                <input type="button" id="bntLeft" value="&#11013;" disabled onclick="clickMoveE()"> <!-- botão esquerda -->
+                <input type="button" id="bntLeft" value="&#11013;" onclick="clickMoveE()"> <!-- botão esquerda -->
             </form>
         </div>
     </body>
