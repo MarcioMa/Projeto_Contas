@@ -15,7 +15,6 @@ const status = document.getElementById('status');
 var update = false; 
 const reg = 0;
 
-
 function clickNovoReg(){
   if(bntNovo.value === 'Novo') {
     fieldset.disabled = false;  
@@ -157,10 +156,7 @@ function clickExcluirReg() {
         .then(data => {
             if (data.success) {
                 alert('Registro excluído com sucesso!');
-                setTimeout(() => {
-                    carregarRegistros();
-                }, 1000);
-
+                setTimeout(carregarRegistros, 1000);
             } else {
                 alert('Falha ao excluir o registro.');
             }
@@ -199,23 +195,26 @@ function carregarRegistros() {
         });
 }
 
-function formatarData(data) {
-    const partes = data.split('-'); // Divide a string da data em partes
-    if (partes.length === 3) {
-        // Se a string estiver no formato esperado 'yyyy-MM-dd'
-        const ano = partes[0];
-        const mes = partes[1];
-        const dia = partes[2];
-        return `${dia}-${mes}-${ano}`;
-    } else {
-        // Caso contrário, retorna a data original
-        return data;
-    }
-}
-
 function formatarValor(valor) {
     const valorFormatado = Number(valor).toFixed(2); // Formata para duas casas decimais
     return valorFormatado.toLocaleString('pt-BR'); // Adiciona separador de milhares para formato brasileiro
+}
+
+function formatarData(data) {
+    if (!data || typeof data !== 'string') {
+        return data; // Retorna a data original se não for uma string válida
+    }
+
+    const dataISO = new Date(data);
+    if (isNaN(dataISO.getTime())) {
+        return data; // Retorna a data original se não for uma data válida
+    }
+
+    const dia = dataISO.getUTCDate().toString().padStart(2, '0');
+    const mes = (dataISO.getUTCMonth() + 1).toString().padStart(2, '0');
+    const ano = dataISO.getUTCFullYear();
+
+    return `${dia}-${mes}-${ano}`;
 }
 
 // Função para preencher o formulário com os dados do registro
@@ -224,7 +223,7 @@ function preencherFormulario(registro) {
     document.getElementById('nomeConta').value = registro.nomeConta;
     document.getElementById('dataEmissao').value = formatarData(registro.dataEmissao);
     document.getElementById('valor').value = formatarValor(registro.valor);
-    document.getElementById('vencimento').value = formatarData(registro.vencimento);
+    document.getElementById('vencimento').value = registro.vencimento;
     document.getElementById('status').value = registro.status;
 }
 

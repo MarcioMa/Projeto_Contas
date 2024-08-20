@@ -214,11 +214,11 @@ app.delete('/excluir_registro/:id', (req, res) => {
           connection.release();
 
           if (error) {
-        console.error('Erro ao excluir evento:', error);
-        return res.status(500).json({ error: 'Erro ao excluir evento' });
+        console.error('Erro ao excluir conta:', error);
+        return res.status(500).json({ error: 'Erro ao excluir conta' });
       }
 
-      // Verificar se o evento foi realmente excluído
+      // Verificar se o conta foi realmente excluído
       if (results.affectedRows === 0) {
         console.log(`Conta com ID ${idContas} não encontrado`);
         return res.status(404).json({ error: `Conta com ID ${idContas} não encontrado` });
