@@ -25,7 +25,8 @@ function clickNovoReg(){
     bntRight.disabled = true;
     bntLeft.disabled = true;
     formCadastro.reset();
-    
+    changeInputDate()
+
   }else{
     bntNovo.value = 'Novo';
     bntSave.disabled = true;
@@ -35,8 +36,8 @@ function clickNovoReg(){
     bntExcluir.disabled = false;
     bntRight.disabled = false;
     bntLeft.disabled = false;
-    formCadastro.reset();
     update = false;
+    formCadastro.reset();
   } 
 }
 
@@ -57,6 +58,7 @@ function clickSaveReg(){
   if(nomeConta.value == "" && dataEmissao.value == "" && valor.value == "" && vencimento.value == "") {
     alert("Informe todos dados para salvar!");
   }
+  
   if(update == true){
     AtualizarReg(); // chama função atualizar   
   }else{
@@ -214,7 +216,7 @@ function formatarData(data) {
     const mes = (dataISO.getUTCMonth() + 1).toString().padStart(2, '0');
     const ano = dataISO.getUTCFullYear();
 
-    return `${dia}-${mes}-${ano}`;
+    return `${dia}/${mes}/${ano}`;
 }
 
 // Função para preencher o formulário com os dados do registro
@@ -223,7 +225,7 @@ function preencherFormulario(registro) {
     document.getElementById('nomeConta').value = registro.nomeConta;
     document.getElementById('dataEmissao').value = formatarData(registro.dataEmissao);
     document.getElementById('valor').value = formatarValor(registro.valor);
-    document.getElementById('vencimento').value = registro.vencimento;
+    document.getElementById('vencimento').value = formatarData(registro.vencimento);
     document.getElementById('status').value = registro.status;
 }
 
@@ -249,6 +251,33 @@ function clickMoveE() {
 function atualizarEstadoBotoes() {
     document.getElementById('bntRight').disabled = (indiceAtual >= registros.length - 1);
     document.getElementById('bntLeft').disabled = (indiceAtual <= 0);
+}
+
+function changeInputDate() {
+    // Obtém o elemento input inicial
+    const inputText = document.getElementById('dataEmissao');
+
+    // Cria um novo elemento input de tipo date
+    const inputDate = document.createElement('input');
+    inputDate.type = 'date';
+    inputDate.id = 'dataEmissao';
+
+    // Substitui o input text pelo input date no DOM
+    inputText.parentNode.replaceChild(inputDate, inputText);
+}
+
+function changeInputText() {
+    // Obtém o elemento input inicial
+    const inputDate = document.getElementById('dataEmissao');
+
+    // Cria um novo elemento input de tipo text
+    const inputText = document.createElement('input');
+    inputText.type = 'text';
+    inputText.id = 'dataEmissao';
+    inputText.name = 'dataEmissao';
+    
+    // Substitui o input date pelo input text no DOM
+    inputText.parentNode.replaceChild(inputText, inputDate);
 }
 
 // Inicializar a página carregando registros
