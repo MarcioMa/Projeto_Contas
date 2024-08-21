@@ -192,9 +192,9 @@ app.get('/registros', (req, res) => {
 
 // Rota para executar Delete contas
 app.delete('/excluir_registro/:id', (req, res) => {
-  const idContas = req.params.id;
-
-  if (!idContas) {
+  const idConta = req.params.id;
+ 
+  if (!idConta) {
     return res.status(400).json({ error: 'ID do conta inválido' });
   }
 
@@ -209,26 +209,124 @@ app.delete('/excluir_registro/:id', (req, res) => {
       }
 
       // Executar query
-      connection.query(sql, [idContas], (error, results, fields) => {
+      connection.query(sql, [idConta], (error, results, fields) => {
           // Liberar a conexão de volta ao pool
           connection.release();
 
-          if (error) {
+        if (error) {
         console.error('Erro ao excluir conta:', error);
         return res.status(500).json({ error: 'Erro ao excluir conta' });
       }
 
       // Verificar se o conta foi realmente excluído
       if (results.affectedRows === 0) {
-        console.log(`Conta com ID ${idContas} não encontrado`);
-        return res.status(404).json({ error: `Conta com ID ${idContas} não encontrado` });
+        console.log(`Conta com ID ${idConta} não encontrado`);
+        return res.status(404).json({ error: `Conta com ID ${idConta} não encontrado` });
       }
 
-      console.log(`Conta com ID ${idContas} excluído com sucesso`);
-      res.json({ message: `Conta com ID ${idContas} excluído com sucesso` });
+      console.log(`Conta com ID ${idConta} excluído com sucesso`);
+      res.json({ success: true });
     });
   });
 });
+
+// Rota para atualizar um registro específico verificando e alterando somente os campos diferentes
+app.put('/atualizar_registro/:id', (req, res) => {
+  const id = req.params.id;
+  const { nomeConta, dataEmissao, valor, vencimento, status } = req.body;
+
+  // Validar se pelo menos um campo foi fornecido para atualização
+  if (!nomeConta && !dataEmissao && !valor && !vencimento && !status) {
+      return res.status(400).json({ error: 'Nenhum campo válido para atualização foi fornecido.' });
+  }
+
+  // Consulta SQL para obter os dados atuais do registro
+  const sqlSelect = 'SELECT * FROM contas WHERE idContas = ?';
+
+  // Consulta SQL para atualizar os campos modificados
+  let sqlUpdate = 'UPDATE contas SET ';
+  const params = [];
+
+  // Array para armazenar os campos que foram modificados
+  const camposAtualizados = [];
+
+  pool.getConnection((err, connection) => {
+      if (err) {
+          console.error('Erro ao obter conexão do pool:', err);
+          return res.status(500).json({ error: 'Erro ao atualizar registro.' });
+      }
+
+      // Executar a primeira query para obter os dados atuais
+      connection.query(sqlSelect, [id], (error, results, fields) => {
+          if (error) {
+              connection.release();
+              console.error('Erro ao obter registro:', error);
+              return res.status(500).json({ error: 'Erro ao obter registro.' });
+          }
+
+          if (results.length === 0) {
+              connection.release();
+              return res.status(404).json({ error: `Registro com ID ${id} não encontrado.` });
+          }
+
+          const registroAtual = results[0];
+
+          // Verificar e construir a query SQL dinamicamente
+          if (nomeConta && nomeConta !== registroAtual.nomeConta) {
+              sqlUpdate += 'nomeConta = ?, ';
+              params.push(nomeConta);
+              camposAtualizados.push('nomeConta');
+          }
+          if (dataEmissao && dataEmissao !== registroAtual.dataEmissao) {
+              sqlUpdate += 'dataEmissao = ?, ';
+              params.push(dataEmissao);
+              camposAtualizados.push('dataEmissao');
+          }
+          if (valor && valor !== registroAtual.valor) {
+              sqlUpdate += 'valor = ?, ';
+              params.push(valor);
+              camposAtualizados.push('valor');
+          }
+          if (vencimento && vencimento !== registroAtual.vencimento) {
+              sqlUpdate += 'vencimento = ?, ';
+              params.push(vencimento);
+              camposAtualizados.push('vencimento');
+          }
+          if (status && status !== registroAtual.status) {
+              sqlUpdate += 'status = ?, ';
+              params.push(status);
+              camposAtualizados.push('status');
+          }
+
+          // Remover a última vírgula e espaço da query SQL
+          sqlUpdate = sqlUpdate.slice(0, -2);
+
+          // Adicionar a condição WHERE para o ID do registro
+          sqlUpdate += ' WHERE idContas = ?';
+          params.push(id);
+
+          // Executar a query de atualização se houver campos modificados
+          if (camposAtualizados.length > 0) {
+              connection.query(sqlUpdate, params, (errorUpdate, resultsUpdate, fieldsUpdate) => {
+                  connection.release(); // Liberar a conexão de volta ao pool
+
+                  if (errorUpdate) {
+                      console.error('Erro ao atualizar registro:', errorUpdate);
+                      return res.status(500).json({ error: 'Erro ao atualizar registro.' });
+                  }
+
+                  console.log(`Registro com ID ${id} atualizado com sucesso.`);
+                  res.json({ success: true });
+              });
+          } else {
+              // Caso nenhum campo tenha sido modificado
+              connection.release();
+              res.json({ message: 'Nenhum campo foi modificado.' });
+          }
+      });
+  });
+});
+
 
 // Configuração para servir arquivos estáticos (CSS, JavaScript, etc.) do diretório 'public'
 app.use(express.static(path.join(__dirname, 'public')));

@@ -25,8 +25,8 @@ function clickNovoReg(){
     bntRight.disabled = true;
     bntLeft.disabled = true;
     formCadastro.reset();
-    changeInputDate()
-
+    emissaoInputDate();
+    vencimentoInputDate();
   }else{
     bntNovo.value = 'Novo';
     bntSave.disabled = true;
@@ -37,7 +37,10 @@ function clickNovoReg(){
     bntRight.disabled = false;
     bntLeft.disabled = false;
     update = false;
+    emissaoInputText();
+    vencimentoInputText();
     formCadastro.reset();
+    carregarRegistros();
   } 
 }
 
@@ -51,11 +54,13 @@ function clickAtualizarReg(){
     bntRight.disabled = true;
     bntLeft.disabled = true;
     update = true;
+    emissaoInputDate();
+    vencimentoInputDate();
   } 
 }
 
 function clickSaveReg(){
-  if(nomeConta.value == "" && dataEmissao.value == "" && valor.value == "" && vencimento.value == "") {
+    if (!nomeConta || !dataEmissao || !valor || !vencimento || !status) {
     alert("Informe todos dados para salvar!");
   }
   
@@ -95,6 +100,8 @@ function SaveReg() {
           bntRight.disabled = false;
           bntLeft.disabled = false;
           formCadastro.reset();
+          emissaoInputText();
+          vencimentoInputText();
           window.location.href='./cadastro.html';
       } else {
           alert('Falha ao salvar o registro.');
@@ -109,7 +116,7 @@ function SaveReg() {
 //Função para atualizar registro
 function AtualizarReg() {
   const formData = {
-      id: document.getElementById('id').value,
+      id: document.getElementById('idConta').value,
       nomeConta: document.getElementById('nomeConta').value,
       dataEmissao: document.getElementById('dataEmissao').value,
       valor: parseFloat(document.getElementById('valor').value),
@@ -117,7 +124,9 @@ function AtualizarReg() {
       status: document.getElementById('status').value
   };
 
-  fetch('/atualizar_registro', { 
+  const id = document.getElementById('idConta').value;
+
+  fetch(`/atualizar_registro/${id}`,{ 
       method: 'PUT',
       headers: {
           'Content-Type': 'application/json'
@@ -127,6 +136,7 @@ function AtualizarReg() {
   .then(response => response.json())
   .then(data => {
       if (data.success) {
+      alert('Registro atualizado com sucesso!');
       fieldset.disabled = false;  
       bntNovo.value = 'Novo';
       bntSave.disabled = true;
@@ -135,8 +145,9 @@ function AtualizarReg() {
       bntRight.disabled = false;
       bntLeft.disabled = false;
       formCadastro.reset();
-      window.location.href='cadastro.html';
-      alert('Registro atualizado com sucesso!');
+      emissaoInputText();
+      vencimentoInputText();
+      window.location.href='./cadastro.html';
       } else {
           alert('Falha ao atualizar o registro.');
       }
@@ -151,14 +162,20 @@ function clickExcluirReg() {
   const id = document.getElementById('idConta').value;
 
   if (confirm(`Tem certeza que deseja excluir o registro com ID ${id}?`)) {
-        fetch(`/excluir_registro/${id}`, { 
+        fetch(`/excluir_registro/${id}`,{ 
             method: 'DELETE'
         })
-        .then(response => response.json())
+        //.then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao excluir o registro.');
+            }
+            return response.json();
+        })
         .then(data => {
             if (data.success) {
                 alert('Registro excluído com sucesso!');
-                setTimeout(carregarRegistros, 1000);
+                window.location.href='./cadastro.html';
             } else {
                 alert('Falha ao excluir o registro.');
             }
@@ -253,20 +270,35 @@ function atualizarEstadoBotoes() {
     document.getElementById('bntLeft').disabled = (indiceAtual <= 0);
 }
 
-function changeInputDate() {
+//funcão para alterar input Emissão para text para date
+function emissaoInputDate() {
     // Obtém o elemento input inicial
-    const inputText = document.getElementById('dataEmissao');
-
-    // Cria um novo elemento input de tipo date
-    const inputDate = document.createElement('input');
-    inputDate.type = 'date';
-    inputDate.id = 'dataEmissao';
+    const inpuTextEmissao = document.getElementById('dataEmissao');
+    // Cria um novo elemento input de tipo date para emissão
+    const inputDtEmissao = document.createElement('input');
+    inputDtEmissao.type = 'date';
+    inputDtEmissao.id = 'dataEmissao';
+    inputDtEmissao.name = 'dataEmissao';
 
     // Substitui o input text pelo input date no DOM
-    inputText.parentNode.replaceChild(inputDate, inputText);
+    inpuTextEmissao.parentNode.replaceChild(inputDtEmissao, inpuTextEmissao);
 }
 
-function changeInputText() {
+//funcão para alterar input vencimento para text para date
+function vencimentoInputDate() {
+    // Obtém o elemento input inicial
+    const inpuTextVenc = document.getElementById('vencimento');
+    // Cria um novo elemento input de tipo date para emissão
+    const inputDtVenc = document.createElement('input');
+    inputDtVenc.type = 'date';
+    inputDtVenc.id = 'vencimento';
+    inputDtVenc.name = 'vencimento';
+
+    // Substitui o input text pelo input date no DOM
+    inpuTextVenc.parentNode.replaceChild(inputDtVenc, inpuTextVenc);
+}
+
+function emissaoInputText() {
     // Obtém o elemento input inicial
     const inputDate = document.getElementById('dataEmissao');
 
@@ -277,7 +309,21 @@ function changeInputText() {
     inputText.name = 'dataEmissao';
     
     // Substitui o input date pelo input text no DOM
-    inputText.parentNode.replaceChild(inputText, inputDate);
+    inputDate.parentNode.replaceChild(inputText, inputDate);
+}
+
+function vencimentoInputText() {
+    // Obtém o elemento input inicial
+    const inputDtVenc = document.getElementById('vencimento');
+
+    // Cria um novo elemento input de tipo text
+    const inputTextVenc = document.createElement('input');
+    inputTextVenc.type = 'text';
+    inputTextVenc.id = 'vencimento';
+    inputTextVenc.name = 'vencimento';
+    
+    // Substitui o input date pelo input text no DOM
+    inputDtVenc.parentNode.replaceChild(inputTextVenc, inputDtVenc);
 }
 
 // Inicializar a página carregando registros
