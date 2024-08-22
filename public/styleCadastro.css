@@ -152,12 +152,13 @@ nav {
   footer {
     background-color: #333; 
     color: #fff; 
-    padding: 10px;
     text-align: center; 
-    position: fixed; 
+    position: fixed;
+    padding-top: 10px; 
     bottom: 0; 
     width: 100%; 
-    }
+  }
+
   /* Responsive Menu (Optional) */
   @media (max-width: 768px) {
     nav ul {

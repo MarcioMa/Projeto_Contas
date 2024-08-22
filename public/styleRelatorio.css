@@ -18,7 +18,26 @@ body {
     text-align: center;
     margin: 1%;
   }
+  
+  .find{
+    position: relative;
+    float: right;
+    right: 20px;
+  }
 
+  #inputFind{
+    height: 30px;
+    width: 320px;
+  }
+  #bntOk{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    float: right;
+  }
+  
   .content{
     background-color: #FFF;
     border: 5px groove #ccc;
@@ -88,12 +107,12 @@ nav {
   footer {
     background-color: #333; 
     color: #fff; 
-    padding: 10px;
     text-align: center; 
-    position: fixed; 
+    position: fixed;
+    padding-top: 10px; 
     bottom: 0; 
     width: 100%; 
-    }
+  }
   /* Responsive Menu (Optional) */
   @media (max-width: 768px) {
     nav ul {
