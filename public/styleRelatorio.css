@@ -23,6 +23,7 @@ body {
     position: relative;
     float: right;
     right: 20px;
+    height: 10px;
   }
 
   #inputFind{
@@ -32,7 +33,7 @@ body {
   #bntOk{
     background-color: #4CAF50;
     color: white;
-    padding: 10px 20px;
+    padding: 8px 20px;
     border: none;
     cursor: pointer;
     float: right;
@@ -113,6 +114,21 @@ nav {
     bottom: 0; 
     width: 100%; 
   }
+  h3{
+    text-align: center;
+    margin-top: 0%;
+  }
+  #selRelatorio{
+    width: 180px;
+    height: 40px;
+    text-align: justify;
+    margin-top: 20px;
+    position: relative;
+    float: right;
+    right: 20px;
+    border: 5px groove #ccc;
+  }
+
   /* Responsive Menu (Optional) */
   @media (max-width: 768px) {
     nav ul {
