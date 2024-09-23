@@ -6,21 +6,50 @@
   <link rel="stylesheet" href="./styleRelatorio.css">  
 </head>
 <body>
-    <h1>Relatório de Contas</h1>
+    <h1>Relatórios</h1>
     <nav class="menu">
         <a href="index.html">Inicio</a>
         <a href="cadastro.html">Cadastro</a>
         <a href="relatorio.html" class="active">Relatórios</a>
     </nav>
-      <select id="selRelatorio">
-          <option>Relatório da Agenda</option>
-          <option>Relatório da Cadastro</option>
+      <select id="selRelatorio" onselect="carregaRelatorio()">
+          <option>Agenda</option>
+          <option>Cadastro</option>
       </select>
     <br>  
     <div class="content">
-      <h3>Relatórios Geral</h3>
-      
+      <h3 id="TitleH3">Relatório Agenda</h3>
+        <table id="events-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Data</th>
+              <th>Hora</th>
+              <th>Nome do Evento</th>
+              <th>Descrição</th>
+            </tr>
+          </thead>
+          <tbody id="events-table-body">
+            <!-- Os dados serão inseridos aqui dinamicamente -->
+          </tbody>
+        </table>
+        <table id="cads-table" hidden="hidden">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Conta</th>
+                <th>Emissão</th>
+                <th>Valor</th>
+                <th>Vencimento</th>
+                <th>Status</th>
+              </tr>
+          </thead>
+          <tbody id="cad-table-body">
+              <!-- Os dados serão inseridos aqui dinamicamente -->
+            </tbody>
+          </table>
+        </div>
     </div>
   </body>
-
+  <script src="scriptRelatorio.js"></script>
 </html>

@@ -17,7 +17,7 @@ const pool = mysql.createPool({
   connectionLimit: 10, // número máximo de conexões simultâneas
   host: 'localhost',
   user: 'root',
-  password: '',
+  password: 'root',
   database: 'dbcf'
 });
 
