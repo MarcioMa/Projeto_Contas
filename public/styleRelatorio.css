@@ -129,6 +129,46 @@ nav {
     border: 5px groove #ccc;
   }
 
+  table{
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    border: 2px groove;
+    margin-left: 30px;
+  }
+
+  th, td {
+    padding: 10px;
+    margin: 10px;
+    text-align: left;
+    border-left: 2px groove;
+  }
+
+  th{
+    background-color: #ccc;
+  }
+
+  tr:nth-child(even) {
+      background-color: #9cf0c8; /* Cor para linhas pares */
+  }
+
+  tr:nth-child(odd) {
+      background-color: #ffffff; /* Cor para linhas ímpares */
+  }
+  
+  .imagem_hover{
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    position: relative;
+    display:inline-flex;
+    float: right;
+    margin-top: 20px;
+    right: 250px;
+    border: 3px groove #ccc;
+    background-color: #FFF;
+    padding: 1px;
+  }
   /* Responsive Menu (Optional) */
   @media (max-width: 768px) {
     nav ul {

@@ -17,7 +17,7 @@ const pool = mysql.createPool({
   connectionLimit: 10, // número máximo de conexões simultâneas
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: '',
   database: 'dbcf'
 });
 
@@ -76,6 +76,30 @@ app.get('/lista', (req, res) => {
         if (error) {
             console.error('Erro ao buscar eventos:', error);
             res.status(500).json({ error: 'Erro ao buscar eventos' });
+        } else {
+            res.json(results); // Retorna os eventos encontrados em formato JSON
+        }
+    });
+  });
+});
+
+app.get('/listaContas', (req, res) => {
+  // Pegar uma conexão do pool
+  pool.getConnection((err, connection) => {
+      if (err) {
+          console.error('Erro ao obter conexão do pool:', err);
+          res.status(500).json({ error: 'Erro ao buscar eventos' });
+          return;
+      }
+
+      // Executar query
+      connection.query('SELECT * FROM contas', (error, results, fields) => {
+        // Liberar a conexão de volta ao pool
+        connection.release();
+
+        if (error) {
+            console.error('Erro ao buscar contas:', error);
+            res.status(500).json({ error: 'Erro ao buscar contas' });
         } else {
             res.json(results); // Retorna os eventos encontrados em formato JSON
         }

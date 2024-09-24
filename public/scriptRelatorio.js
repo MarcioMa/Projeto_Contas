@@ -77,9 +77,63 @@ function carregaRelatorio() {
                 console.error('Erro ao carregar os eventos:', error);
                 alert('Erro ao carregar os eventos');
               });
+
     } else {
+
         document.getElementById('cads-table').style.display = "table";
         document.getElementById('events-table').style.display = "none";
         document.getElementById('TitleH3').innerText = "Relatório Cadastros";
+
+        //Busca dados na tabela Contas DB
+        fetch('http://localhost:3000/listaContas') // Endpoint para listar os eventos salvos
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Não foi possível obter os eventos');
+          }
+          return response.json();
+        })
+        .then(data => {
+          const cadTableBody = document.getElementById('cad-table-body');
+
+          //limpeza dados da tabela
+          cadTableBody.innerHTML = '';
+
+          data.forEach(conta => {
+            // Criar uma nova linha na tabela
+            const row = document.createElement('tr');
+    
+            // Adicionar células com os dados do evento
+            const idCell = document.createElement('td');
+            idCell.textContent = conta.idContas;
+            row.appendChild(idCell);
+  
+            const nmConta = document.createElement('td');
+            nmConta.textContent = formatarData(conta.nomeConta);
+            row.appendChild(nmConta);
+    
+            const dtEmissao = document.createElement('td');
+            dtEmissao.textContent = formatarData(conta.dataEmissao);
+            row.appendChild(dtEmissao);
+    
+            const  valorCell = document.createElement('td');
+            valorCell.textContent = "R$ " + formatarValor(conta.valor);
+            row.appendChild(valorCell);
+    
+            const  vencCell = document.createElement('td');
+            vencCell.textContent = formatarData(conta.vencimento);
+            row.appendChild(vencCell);
+
+            const  statusCell = document.createElement('td');
+            statusCell.textContent = conta.status;
+            row.appendChild(statusCell);
+
+            // Adicionar a linha à tabela
+            cadTableBody.appendChild(row);
+          });
+        })
+        .catch(error => {
+          console.error('Erro ao carregar os eventos:', error);
+          alert('Erro ao carregar os eventos');
+        });
     }
 }
