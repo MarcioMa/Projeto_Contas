@@ -169,16 +169,27 @@ nav {
     background-color: #FFF;
     padding: 1px;
   }
-  /* Responsive Menu (Optional) */
-  @media (max-width: 768px) {
-    nav ul {
-      text-align: center; 
+
+  @media print{
+    nav, footer, .imagem_hover, select {
+      display: none;
     }
-  
-    nav li {
-      display: block; 
-      margin-right: 0; 
-      margin-bottom: 10px; 
+    #TitleH3{
+      display: none;
     }
-  }
-  
+    content{
+      border: none;
+      display: none;
+    }
+    table{
+      border: 1px solid #000;
+      width: 100%;
+      position: relative;
+      top:0%;
+    }
+    th, td{
+      border: 1px solid #000;
+      padding: 8px;
+      text-align: left;
+    }
+  }  
